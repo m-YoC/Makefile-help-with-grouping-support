@@ -1,7 +1,7 @@
 # Makefileのhelpを表示する奴のグループ分け表示対応版
 
 <p align="center">
-  <img src="./Makefile-help-with-grouping-support-image.png" alt="いめーじ" width="500" />
+  <img src="./image.png" alt="いめーじ" width="500" />
 </p>
 
 Makefile helpで検索するとよく出てくる奴のグループ分け表示に対応したバージョンです．  
