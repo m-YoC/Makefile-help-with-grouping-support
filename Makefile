@@ -1,4 +1,8 @@
 
+###> 
+###> !Sample: Makefile help with grouping support
+###>
+
 ###> command group 1
 
 commandA: ## descriptionA
