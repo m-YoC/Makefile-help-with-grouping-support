@@ -1,30 +1,30 @@
 
 ###> command group 1
 
-commandA: ## commentA
+commandA: ## descriptionA
 	:
-commandB: ## commentB
+commandB: ## descriptionB
 	:
 
 ###> command group 2
 
-commandC: ## commentC
+commandC: ## descriptionC
 	:
-commandD: ## commentD
+commandD: ## descriptionD
 	:
 
-# groupingの無効化
+# Disable grouping mode
 ###> @
 
-commandE: ## commentE
+commandE: ## descriptionE
 	:
-commandF: ## commentF
+commandF: ## descriptionF
 	:
 
 # --------------------------------------------------------------------------------
-# newline (groupingも無効化される)
+# newline (Grouping mode is also disabled)
 ###>
 .DEFAULT_GOAL := help
-# head, cut, xargs, grep, gawkコマンドがインストールされている必要があります
+# Necessary commands: NecessaryNecessaryhead, cut, xargs, grep, gawk
 help: ## Display this help screen
 	@head -n 2 mfhelp.awk | cut -c 2- | xargs -i grep -E '{}' $(MAKEFILE_LIST) | awk -f mfhelp.awk
