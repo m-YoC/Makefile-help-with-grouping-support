@@ -2,38 +2,53 @@
 # (^[a-zA-Z_-]+:.*?## .*$|^###>( | .+)?$)
 
 BEGIN {
-  cmdw=20
+  cmdw=20;
 
-  FS="(:.*?## |#> ?)"
-  gr="f"
-  gray="\033[30m"
-  bgray="\033[1;30m"
-  cyan="\033[36m"
-  clear="\033[0m"
+  FS="(:.*?## |#> ?)";
+  gr="f";
+  gray="\033[30m";
+  bgray="\033[1;30m";
+  cyan="\033[36m";
+  clear="\033[0m";
 
-  group_color=gray
-  bold_group_color=bgray
-  cmd_color=cyan
+  gc=gray;
+  bgc=bgray;
+  cmdc=cyan;
+
+  _c = 0;
+  _d = 0;
 }
 {
   if($1 == "##") {
-    if($2 ~ "^ *$") { 
-      gr="f"
-      printf ("\n")
-    } else if($2 ~ "^@") {
-      gr="f"
-    } else if($2 ~ "^!") {
-      gr="t" 
-      printf (bold_group_color "%s" clear "\n", substr($2, 2))
-    } else{
-      gr="t"
-      printf (group_color "%s" clear "\n", $2)
+    switch($2) {
+      case /^ *$/:
+        write[_c++] = sprintf("\n");
+        gr="f"; next;
+      case /^@/:
+        gr="f"; next;
+      case /^!/:
+        write[_c++] = sprintf(bgc "%s" clear "\n", substr($2, 2));
+        gr="t"; next;
+      default:
+        write[_c++] = sprintf(gc "%s" clear "\n", $2);
+        gr="t"; next;
     }
   } else {
     if(gr == "t") {
-      printf (group_color "\\_ " cmd_color "%-" (cmdw-3) "s" clear " %s\n", $1, $2)
+      for(i=1;i<=_d;i++) { sub(/^\x1b\[(.;)?..m /, gc "|", write[_c-i]); }
+      _d = 0;
+      write[_c++] = sprintf(gc "\\_ " cmdc "%-" (cmdw-3) "s" clear " %s\n", $1, $2);
     } else {
-      printf (cmd_color "%-" cmdw "s" clear " %s\n", $1, $2)
+      write[_c++] = sprintf(cmdc "%-" cmdw "s" clear " %s\n", $1, $2);
     }
+    for(i=3;i<=NF;i++) if($i != "") {
+      write[_c++] = sprintf(gc "%-" (cmdw+3) "s%s" clear "\n", "", $i);
+      _d++;
+    }
+  }
+}
+END {
+  for(i=0;i<_c;i++) {
+    printf write[i];
   }
 }
