@@ -1,5 +1,5 @@
 # Regular expression for grep -E option
-# (^[a-zA-Z_-]+:.*?## .*$|^###>( | .+)?$)
+# (^[a-zA-Z0-9_-]+:.*?## .*$|^###>( | .+)?$)
 
 BEGIN {
   cmdw=20;
