@@ -8,6 +8,8 @@ Makefile helpで検索するとよく出てくる奴のグループ分け表示�
 awkプログラムが複雑化しhelpのコマンドがワンライナーとしては長大になってしまったためawkファイルに分割しています．  
 使用する場合はご了承ください．
 
+Used commands: `sed`, `cut`, `xargs`, `grep`, `gawk`
+
 ## usage
 
 [Makefileのサンプルを参照](./Makefile)
