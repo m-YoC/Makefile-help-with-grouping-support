@@ -19,6 +19,8 @@ Makefile内のhelp部分をコピペしてください．`mfhelp.awk`ファイ�
 よくある奴です．  
 `command: ## description`
 
+- `command: ## description #> subtext1 #> subtext2 ...`とすることで補足文を加えることができます．
+
 ### グループコメント
 
 `###>`がグループ分け関連のコメント記法です．スペースなどは入れず，記述行の先頭に配置してください．
