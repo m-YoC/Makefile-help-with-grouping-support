@@ -8,6 +8,19 @@ Makefile helpで検索するとよく出てくる奴のグループ分け表示�
 awkプログラムが複雑化しhelpのコマンドがワンライナーとしては長大になってしまったためawkファイルに分割しています．  
 使用する場合はご了承ください．
 
+## Install
+
+#### mfhelp.awkをインストールする
+```bash
+wget --no-check-certificate https://raw.githubusercontent.com/m-YoC/Makefile-help-with-grouping-support/main/mfhelp.awk
+```
+
+#### Makefileにhelpを設定する
+```Makefile
+.DEFAULT_GOAL := help
+help: ## Display this help screen
+	@sed -n 2p mfhelp.awk | cut -c 2- | xargs -i grep -E '{}' $(MAKEFILE_LIST) | awk -f mfhelp.awk
+```
 
 ## usage
 
