@@ -22,7 +22,7 @@ help: ## Display this help screen
 	@sed -n 2p mfhelp.awk | cut -c 2- | xargs -i grep -E '{}' $(MAKEFILE_LIST) | awk -f mfhelp.awk
 ```
 
-## usage
+## Usage
 
 [Makefileのサンプルを参照](./Makefile)
 
